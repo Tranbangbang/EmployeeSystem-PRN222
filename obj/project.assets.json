@@ -4053,23 +4053,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Users\\songt\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\zzzzzzzzzzzz\\EmployeeSystem-PRN222\\EmployManager.csproj",
+      "projectUniqueName": "E:\\Z_Code_ding\\EmployeeSystem-PRN222\\EmployManager.csproj",
       "projectName": "EmployManager",
-      "projectPath": "E:\\zzzzzzzzzzzz\\EmployeeSystem-PRN222\\EmployManager.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "E:\\zzzzzzzzzzzz\\EmployeeSystem-PRN222\\obj\\",
+      "projectPath": "E:\\Z_Code_ding\\EmployeeSystem-PRN222\\EmployManager.csproj",
+      "packagesPath": "C:\\Users\\songt\\.nuget\\packages\\",
+      "outputPath": "E:\\Z_Code_ding\\EmployeeSystem-PRN222\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\songt\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

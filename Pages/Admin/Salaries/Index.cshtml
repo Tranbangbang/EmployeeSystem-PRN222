@@ -52,16 +52,22 @@
                             <th>Họ và tên</th>
                             <th>Phòng ban</th>
                             <th>Lương cơ bản</th>
-                            <th>Phụ cấp</th>
+                             <th>Phụ cấp</th> 
                             <th>Thưởng</th>
                             <th>Khấu trừ</th>
                             <th>Tổng thu nhập</th>
                             <th>Trạng thái</th>
-                            <th>Thao tác</th>
+                            @* <th>Thao tác</th> *@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Salaries.Count == 0)
+                        @if (Model.EmployeeSalaries  == null)
+                        {
+                            <tr>
+                                <td colspan="10" class="text-center py-4">Không có dữ liệu lương trong tháng này</td>
+                            </tr>
+                        }
+                        else if (Model.EmployeeSalaries.Count == 0)
                         {
                             <tr>
                                 <td colspan="10" class="text-center py-4">Không có dữ liệu lương trong tháng này</td>
@@ -69,43 +75,43 @@
                         }
                         else
                         {
-                            @foreach (var salary in Model.Salaries)
+                            @foreach (var salary in Model.EmployeeSalaries)
                             {
                                 <tr>
-                                    <td>@salary.Employee.EmployeeCode</td>
-                                    <td>@salary.Employee.FullName</td>
-                                    <td>@salary.Employee.Department?.Name</td>
-                                    <td>@salary.BasicSalary.ToString("N0") VNĐ</td>
-                                    <td>@salary.Allowance.ToString("N0") VNĐ</td>
-                                    <td>@salary.Bonus.ToString("N0") VNĐ</td>
-                                    <td>@salary.Deduction.ToString("N0") VNĐ</td>
-                                    <td class="fw-bold">@salary.TotalSalary.ToString("N0") VNĐ</td>
+                                    <td>@salary.EmployeeCode</td>
+                                    <td>@salary.EmployeeName</td>
+                                    <td>@salary.DepartmentName</td>
+                                    <td>@salary.basicSalary.ToString("N0") VNĐ</td>
+                                     <td>@salary.allowance.ToString("N0") VNĐ</td> 
+                                    <td>@salary.bounus.ToString("N0") VNĐ</td>
+                                    <td>@salary.deduction.ToString("N0") VNĐ</td>
+                                    <td>@salary.totalSalary.ToString("N0") VNĐ</td>
                                     <td>
-                                        @if (salary.Status == "Đã thanh toán")
-                                        {
-                                            <span class="badge bg-success">@salary.Status</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-warning text-dark">@salary.Status</span>
-                                        }
+                                        @* @if (salary.Status == "Đã thanh toán") *@
+                                        @* { *@
+                                        @*     <span class="badge bg-success">@salary.Status</span> *@
+                                        @* } *@
+                                        @* else *@
+                                        @* { *@
+                                        @*     <span class="badge bg-warning text-dark">@salary.Status</span> *@
+                                        @* } *@
                                     </td>
                                     <td>
-                                        <div class="btn-group">
-                                            <a href="/Admin/Salaries/Edit/@salary.Id" class="btn btn-sm btn-outline-primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            @if (salary.Status != "Đã thanh toán")
-                                            {
-                                                <button type="button" class="btn btn-sm btn-outline-success"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#processPaymentModal"
-                                                        data-id="@salary.Id"
-                                                        data-name="@salary.Employee.FullName">
-                                                    <i class="bi bi-check-circle"></i>
-                                                </button>
-                                            }
-                                        </div>
+                                        @* <div class="btn-group"> *@
+                                        @*     <a href="/Admin/Salaries/Edit/@salary.Id" class="btn btn-sm btn-outline-primary"> *@
+                                        @*         <i class="bi bi-pencil"></i> *@
+                                        @*     </a> *@
+                                        @*     @if (salary.Status != "Đã thanh toán") *@
+                                        @*     { *@
+                                        @*         <button type="button" class="btn btn-sm btn-outline-success" *@
+                                        @*                 data-bs-toggle="modal" *@
+                                        @*                 data-bs-target="#processPaymentModal" *@
+                                        @*                 data-id="@salary.Id" *@
+                                        @*                 data-name="@salary.Employee.FullName"> *@
+                                        @*             <i class="bi bi-check-circle"></i> *@
+                                        @*         </button> *@
+                                        @*     } *@
+                                        @* </div> *@
                                     </td>
                                 </tr>
                             }

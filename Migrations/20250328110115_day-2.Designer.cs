@@ -4,6 +4,7 @@ using EmployManager.Dal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250328110115_day-2")]
+    partial class day2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,10 +78,6 @@ namespace EmployManager.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Allowance")
-                        .HasColumnType("float")
-                        .HasColumnName("Allowance");
 
                     b.Property<double>("BasicSalary")
                         .HasColumnType("float")
@@ -146,7 +145,6 @@ namespace EmployManager.Migrations
                         new
                         {
                             Id = 1,
-                            Allowance = 0.0,
                             BasicSalary = 0.0,
                             Bonus = 0.0,
                             Deduction = 0.0,
@@ -157,7 +155,7 @@ namespace EmployManager.Migrations
                             HireDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             LastName = "User",
-                            PasswordHash = "$2a$11$A5FTEZSmkic/7XyBIr/WM.OhirHgtw4f0zwQOCVbUCFhNhAdHX3U6",
+                            PasswordHash = "$2a$11$1htHxbxobip/hJ9NBA6Q6uPOPXU7DrrDdEVfuFEAa2WrmCJKiw8I2",
                             PhoneNumber = "0392234",
                             RoleId = 1
                         });

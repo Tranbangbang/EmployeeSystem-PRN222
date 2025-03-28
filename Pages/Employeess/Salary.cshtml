@@ -24,8 +24,9 @@
                             <th>Phòng ban</th>
                             <th>Lương cơ bản</th>
                             <th>Thưởng</th>
+                            <th>Phụ cấp</th>
                             <th>Khấu trừ</th>
-                            <th>Tổng lương</th>
+                            @* <th>Tổng lương</th> *@
                             <th>Chỉnh sửa</th>
                         </tr>
                     </thead>
@@ -41,41 +42,42 @@
                             @foreach (var employee in Model.Employees)
                             {
                                 <tr>
-                                    <td>@employee.EmployeeCode</td>
-                                    <td>@employee.FirstName @employee.LastName</td>
-                                    <td>@employee.Email</td>
-                                    <td>@employee.PhoneNumber</td>
-                                    <td>@(employee.DepartmentId == 1 ? "Quản lý" : "Nhân viên")</td>
+                                    <form method="post" asp-page-handler="UpdateSalary" id="form-@employee.EmployeeCode">
+                                        <td>@employee.EmployeeCode</td>
+                                        <td>@employee.FirstName @employee.LastName</td>
+                                        <td>@employee.Email</td>
+                                        <td>@employee.PhoneNumber</td>
+                                        <td>@(employee.DepartmentId == 1 ? "Quản lý" : "Nhân viên")</td>
 
-                                    <!-- Các trường có thể chỉnh sửa -->
+                                        <!-- Các trường có thể chỉnh sửa -->
+                                        <td>
+                                            <input type="number" class="form-control" name="UpdatedSalary" value="@employee.BasicSalary" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" name="UpdatedBonus" value="@employee.Bonus" />
+                                        </td>
                                     <td>
-                                        <input type="number" class="form-control" name="BasicSalary" value="@employee.BasicSalary" />
+                                        <input type="number" class="form-control" name="UpdatedAllowance" value="@employee.Allowance" />
                                     </td>
-                                    <td>
-                                        <input type="number" class="form-control" name="Bonus" value="@employee.Bonus" />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" name="Deduction" value="@employee.Deduction" />
-                                    </td>
+                                        <td>
+                                            <input type="number" class="form-control" name="UpdatedDeduction" value="@employee.Deduction" />
+                                        </td>
+                                        
 
-                                    <!-- Tính toán tổng lương -->
-                                    <td>
-                                        @((employee.BasicSalary + employee.Bonus - employee.Deduction).ToString("N0")) VND
-                                        <span class="badge @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "bg-success" : "bg-warning")">
-                                            @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "Đủ" : "Cảnh báo")
-                                        </span>
-                                    </td>
+                                        <!-- Tính toán tổng lương -->
+                                        @* <td> *@
+                                        @*         @((employee.BasicSalary + employee.Bonus - employee.Deduction).ToString("N0")) VND *@
+                                        @*     <span class="badge @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "bg-success" : "bg-warning")"> *@
+                                        @*             @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "Đủ" : "Cảnh báo") *@
+                                        @*     </span> *@
+                                        @* </td> *@
 
-                                    <!-- Nút chỉnh sửa -->
-                                    <td>
-                                        <form method="post" >
-                                            <input type="hidden" name="EmployeeId" value="@employee.EmployeeCode" />
-                                            <input type="hidden" name="UpdatedSalary" value="@employee.BasicSalary" />
-                                            <input type="hidden" name="UpdatedBonus" value="@employee.Bonus" />
-                                            <input type="hidden" name="UpdatedDeduction" value="@employee.Deduction" />
-                                            <button type="submit" asp-page-handler="UpdateSalary" class="btn btn-primary btn-sm">Lưu</button>
-                                        </form>
-                                    </td>
+                                        <!-- Nút chỉnh sửa -->
+                                        <td>
+                                        <input type="hidden" name="EmployeeId" value="@employee.Id" />
+                                            <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
+                                        </td>
+                                    </form>
                                 </tr>
                             }
                         }

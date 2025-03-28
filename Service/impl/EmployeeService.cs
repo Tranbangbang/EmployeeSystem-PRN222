@@ -146,5 +146,20 @@ namespace EmployManager.Service.impl
 
             return new PaginatedList<Employee>(items, totalCount, pageIndex, pageSize);
         }
+
+        public async Task<List<Employee>> GetEmployeeByDepartmentAsync(int idDepartment)
+        {
+            List<Employee> employeeList = new List<Employee>();
+            try
+            {
+                return await _context.Employees
+                             .Where(e => e.DepartmentId == idDepartment) // Lọc theo idDepartment
+                             .Include(e => e.Department) // Bao gồm thông tin của Department (nếu cần)
+                             .ToListAsync();
+            }
+            catch (Exception ex) {
+                return new List<Employee>();
+            }
+        }
     }
 }

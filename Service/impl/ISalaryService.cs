@@ -11,5 +11,7 @@ namespace EmployManager.Service.impl
         Task<bool> UpdateSalaryAsync(Salary salary);
         Task<bool> DeleteSalaryAsync(int id);
         Task<bool> ProcessPaymentAsync(int id);
+
+        Task<List<EmployeeSalaryResponse>> GetAllSalaty(int month, int year);
     }
 }

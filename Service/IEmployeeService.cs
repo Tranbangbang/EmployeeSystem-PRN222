@@ -7,6 +7,7 @@ namespace EmployManager.Service
     {
        Task<List<Employee>> GetAllEmployeesAsync();
         Task<Employee> GetEmployeeByIdAsync(int id);
+        Task<List<Employee>> GetEmployeeByDepartmentAsync(int idDepartment);
         Task<Employee> GetEmployeeByEmailAsync(string email);
         Task<bool> CreateEmployeeAsync(Employee employee, string password);
         Task<bool> UpdateEmployeeAsync(Employee employee);

@@ -32,6 +32,9 @@ namespace EmployManager.Models
         [Column("BasicSalary")]
         public double BasicSalary { get; set; }
 
+        [Column("Allowance")]
+        public double Allowance { get; set; }
+
         [Column("Bonus")]
         public double Bonus { get; set; }
 

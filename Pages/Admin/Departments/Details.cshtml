@@ -1,0 +1,127 @@
+﻿@page "{id:int}"
+@model EmployManager.Pages.Admin.Departments.DetailDepartmentModel
+@{
+    ViewData["Title"] = "Chi tiết phòng ban";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Chi tiết phòng ban: @Model.Department.Name</h1>
+        <a href="/Admin/Departments" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Thông tin phòng ban</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>ID:</strong> @Model.Department.Id</p>
+                            <p><strong>Tên phòng ban:</strong> @Model.Department.Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Số nhân viên:</strong> @(Model.Department.Employees?.Count ?? 0)</p>
+                            <p><strong>Mô tả:</strong> @(string.IsNullOrEmpty(Model.Department.Description) ? "Không có mô tả" : Model.Department.Description)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        @* <div class="card-header bg-light d-flex justify-content-between align-items-center"> *@
+        @*     <h5 class="card-title mb-0">Danh sách nhân viên</h5> *@
+        @*     <a href="/Admin/Employees/Create?departmentId=@Model.Department.Id" class="btn btn-sm btn-primary"> *@
+        @*         <i class="bi bi-plus-circle me-2"></i> Thêm nhân viên *@
+        @*     </a> *@
+        @* </div> *@
+        <div class="card-body">
+            @if (Model.EmployeeList == null || !Model.EmployeeList.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i> Phòng ban này chưa có nhân viên nào.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày vào làm</th>
+                                @* <th>Thao tác</th> *@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var employeeItem in Model.EmployeeList)
+                            {
+                                <tr>
+                                    <td>@employeeItem.EmployeeCode</td>
+                                    <td>@employeeItem.FullName</td>
+                                    <td>@employeeItem.Email</td>
+                                    <td>@employeeItem.PhoneNumber</td>
+                                    <td>@employeeItem.HireDate</td>
+                                    <td>
+                                        <!-- Thao tác của nhân viên, chưa thay đổi -->
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Delete Employee Modal -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteEmployeeModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="delete-id" name="employeeId">
+                    <p>Bạn có chắc chắn muốn xóa nhân viên <strong id="delete-name"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger" asp-page-handler="DeleteEmployee">Xóa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Delete Employee Modal
+            var deleteModal = document.getElementById('deleteEmployeeModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+
+                var idInput = deleteModal.querySelector('#delete-id');
+                var nameSpan = deleteModal.querySelector('#delete-name');
+
+                idInput.value = id;
+                nameSpan.textContent = name;
+            });
+        });
+    </script>
+}
