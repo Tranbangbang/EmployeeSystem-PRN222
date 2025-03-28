@@ -136,6 +136,8 @@ namespace EmployManager.Service.impl
                         totalSalary = records.Count * employee.BasicSalary + employee.Bonus + employee.Allowance - employee.Deduction
                     };
 
+                    if(records.Count == 0 )
+                        tmp.totalSalary = 0;
                     result.Add(tmp);
                 }
 

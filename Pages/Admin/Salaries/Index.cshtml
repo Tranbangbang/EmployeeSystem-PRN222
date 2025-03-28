@@ -51,8 +51,10 @@
                             <th>Mã NV</th>
                             <th>Họ và tên</th>
                             <th>Phòng ban</th>
+                            <th>Số ngày công</th>
+                            <th>Số ngày nghỉ</th>
                             <th>Lương cơ bản</th>
-                             <th>Phụ cấp</th> 
+                            <th>Phụ cấp</th>
                             <th>Thưởng</th>
                             <th>Khấu trừ</th>
                             <th>Tổng thu nhập</th>
@@ -61,7 +63,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.EmployeeSalaries  == null)
+                        @if (Model.EmployeeSalaries == null)
                         {
                             <tr>
                                 <td colspan="10" class="text-center py-4">Không có dữ liệu lương trong tháng này</td>
@@ -81,8 +83,10 @@
                                     <td>@salary.EmployeeCode</td>
                                     <td>@salary.EmployeeName</td>
                                     <td>@salary.DepartmentName</td>
+                                    <td>@salary.dayWorks</td>
+                                    <td>@salary.dayOff</td>
                                     <td>@salary.basicSalary.ToString("N0") VNĐ</td>
-                                     <td>@salary.allowance.ToString("N0") VNĐ</td> 
+                                    <td>@salary.allowance.ToString("N0") VNĐ</td>
                                     <td>@salary.bounus.ToString("N0") VNĐ</td>
                                     <td>@salary.deduction.ToString("N0") VNĐ</td>
                                     <td>@salary.totalSalary.ToString("N0") VNĐ</td>
@@ -167,12 +171,19 @@
             });
         });
 
-        function exportToExcel() {
-            const table = document.getElementById('salaryTable');
-            const wb  {
-            const table = document.getElementById('salaryTable');
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Bảng lương" });
-            XLSX.writeFile(wb, `Bảng_lương_T${@Model.Month}_${@Model.Year}.xlsx`);
-        }
+        // function exportToExcel() {
+        //     const table = document.getElementById('salaryTable');
+        //     const wb  {
+        //     const table = document.getElementById('salaryTable');
+        //     const wb = XLSX.utils.table_to_book(table, { sheet: "Bảng lương" });
+        //     XLSX.writeFile(wb, `Bảng_lương_T${@Model.Month}_${@Model.Year}.xlsx`);
+        // }
+
+                function exportToExcel() {
+                    const table = document.getElementById('salaryTable');
+                    const wb = XLSX.utils.table_to_book(table, { sheet: "Bảng lương" });
+                    XLSX.writeFile(wb, `Bảng_lương_T${@Model.Month}_${@Model.Year}.xlsx`);
+                }
+
     </script>
 }

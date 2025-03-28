@@ -14,7 +14,8 @@
                     <h5 class="card-title mb-0">Đăng ký mới</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" >
+                        <input type="hidden" name="IdDayOff" value="@Model.EmployeeId" />
                         <div class="mb-3">
                             <label asp-for="LeaveRequest.StartDate" class="form-label">Ngày bắt đầu</label>
                             <input asp-for="LeaveRequest.StartDate" class="form-control" type="date" />
@@ -67,6 +68,10 @@
                                     <th>Số ngày</th>
                                     <th>Loại nghỉ</th>
                                     <th>Trạng thái</th>
+                                    @if(Model.roleUser == 1)
+                                    {
+                                        <th>Thao tác</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,6 +105,29 @@
                                                     <span class="badge bg-danger">@leave.Status</span>
                                                 }
                                             </td>
+                                            @if (Model.roleUser == 1)
+                                            {
+                                                <td>
+                                                    <!-- Biểu tượng Duyệt -->
+                                                    <form method="post" asp-page-handler="Approve" class="d-inline me-2">
+                                                        <input type="hidden" name="idLeave" value="@leave.Id" />
+                                                        <button type="submit" class="btn btn-success">
+                                                            <i class="fas fa-check-circle" style="font-size: 10px;"></i>
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Biểu tượng Từ chối -->
+                                                    <form method="post" asp-page-handler="Reject" class="d-inline">
+                                                        <input type="hidden" name="idLeave" value="@leave.Id" />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-times-circle" style="font-size: 10px;"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            }
+
+
+
                                         </tr>
                                     }
                                 }
@@ -115,3 +143,5 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

@@ -53,7 +53,11 @@
                                     <th>Thời gian kết thúc</th>
                                     <th>Số giờ</th>
                                     <th>Trạng thái</th>
-                                    <th>Ý kiến quản lý</th>
+                                    @* <th>Ý kiến quản lý</th> *@
+                                    @if (Model.roleUser == 1)
+                                    {
+                                        <th>Thao tác</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,6 +91,27 @@
                                                 }
                                             </td>
                                             <td>@request.ManagerComments</td>
+                                            @if (Model.roleUser == 1)
+                                            {
+                                                <td>
+                                                    <!-- Biểu tượng Duyệt -->
+                                                    <form method="post" asp-page-handler="Approve" class="d-inline me-2">
+                                                        <input type="hidden" name="idOT" value="@request.Id" />
+                                                        <button type="submit" class="btn btn-success">
+                                                            <i class="fas fa-check-circle" style="font-size: 10px;"></i>
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Biểu tượng Từ chối -->
+                                                    <form method="post" asp-page-handler="Reject" class="d-inline">
+                                                        <input type="hidden" name="idOT" value="@request.Id" />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-times-circle" style="font-size: 10px;"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            }
+
                                         </tr>
                                     }
                                 }
@@ -102,3 +127,5 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

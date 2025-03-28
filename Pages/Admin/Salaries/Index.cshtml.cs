@@ -34,6 +34,14 @@ namespace EmployManager.Pages.Admin.Salaries
         //    Year = year ?? DateTime.Now.Year;
         public async Task OnGetAsync(int month, int year)
         {
+
+            Month =  DateTime.Now.Month;
+            if(month != null)
+                Month = month;
+            Year =  DateTime.Now.Year;
+            if(year != null)
+                Year = year;
+
             int month_int = 1;
             if (month != null) month_int = month;
 
