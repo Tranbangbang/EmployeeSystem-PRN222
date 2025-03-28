@@ -1,0 +1,87 @@
+﻿@page
+@model EmployManager.Pages.Employeess.SalaryModel
+@{
+    ViewData["Title"] = "Danh sách nhân viên";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <h1 class="h3 mb-4">Danh sách nhân viên</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Thông tin nhân viên</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Mã NV</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Phòng ban</th>
+                            <th>Lương cơ bản</th>
+                            <th>Thưởng</th>
+                            <th>Khấu trừ</th>
+                            <th>Tổng lương</th>
+                            <th>Chỉnh sửa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Employees == null || Model.Employees.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="10" class="text-center py-4">Không có nhân viên nào</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.EmployeeCode</td>
+                                    <td>@employee.FirstName @employee.LastName</td>
+                                    <td>@employee.Email</td>
+                                    <td>@employee.PhoneNumber</td>
+                                    <td>@(employee.DepartmentId == 1 ? "Quản lý" : "Nhân viên")</td>
+
+                                    <!-- Các trường có thể chỉnh sửa -->
+                                    <td>
+                                        <input type="number" class="form-control" name="BasicSalary" value="@employee.BasicSalary" />
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="Bonus" value="@employee.Bonus" />
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="Deduction" value="@employee.Deduction" />
+                                    </td>
+
+                                    <!-- Tính toán tổng lương -->
+                                    <td>
+                                        @((employee.BasicSalary + employee.Bonus - employee.Deduction).ToString("N0")) VND
+                                        <span class="badge @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "bg-success" : "bg-warning")">
+                                            @(employee.BasicSalary + employee.Bonus - employee.Deduction > 0 ? "Đủ" : "Cảnh báo")
+                                        </span>
+                                    </td>
+
+                                    <!-- Nút chỉnh sửa -->
+                                    <td>
+                                        <form method="post" >
+                                            <input type="hidden" name="EmployeeId" value="@employee.EmployeeCode" />
+                                            <input type="hidden" name="UpdatedSalary" value="@employee.BasicSalary" />
+                                            <input type="hidden" name="UpdatedBonus" value="@employee.Bonus" />
+                                            <input type="hidden" name="UpdatedDeduction" value="@employee.Deduction" />
+                                            <button type="submit" asp-page-handler="UpdateSalary" class="btn btn-primary btn-sm">Lưu</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
