@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace EmployManager.Models
@@ -26,6 +27,16 @@ namespace EmployManager.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+
+        [Column("BasicSalary")]
+        public double BasicSalary { get; set; }
+
+        [Column("Bonus")]
+        public double Bonus { get; set; }
+
+        [Column("Deduction")]
+        public double Deduction { get; set; }
 
         [Phone]
         [Display(Name = "Số điện thoại")]

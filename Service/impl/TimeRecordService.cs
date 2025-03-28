@@ -39,30 +39,72 @@ namespace EmployManager.Service.impl
                 .FirstOrDefaultAsync();
         }
 
+
+        //-----tim ban ghi cham cong hom nay 
+        public async Task<TimeRecord> GetAttendanceToday(int employeeId)
+        {
+            var today = DateTime.Today; // Ngày hôm nay
+
+            // Tìm bản ghi có CheckInTime 
+            TimeRecord result = await _context.TimeRecords
+                .Where(tr => tr.EmployeeId == employeeId 
+                    && tr.CheckInTime.Date == today) 
+                .OrderByDescending(tr => tr.CheckInTime)
+                .FirstOrDefaultAsync(); 
+
+            return result;
+        }
+
+
         public async Task<bool> CheckInAsync(int employeeId, string notes = null)
         {
-            try
-            {
-                // Check if there's already an open time record
-                var openRecord = await GetOpenTimeRecordAsync(employeeId);
-                if (openRecord != null)
-                    return false;
 
+            TimeRecord timeToday = await this.GetAttendanceToday(employeeId);
+
+            if (timeToday != null)
+            {
+                timeToday.CheckOutTime = DateTime.Now;
+
+                _context.TimeRecords.Update(timeToday);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+                
+            else
+            {
                 var timeRecord = new TimeRecord
                 {
                     EmployeeId = employeeId,
                     CheckInTime = DateTime.Now,
                     Notes = notes
                 };
-
                 _context.TimeRecords.Add(timeRecord);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+
+            //try
+            //{
+            //    // Check if there's already an open time record
+            //    var openRecord = await GetOpenTimeRecordAsync(employeeId);
+            //    if (openRecord != null)
+            //        return false;
+
+            //    var timeRecord = new TimeRecord
+            //    {
+            //        EmployeeId = employeeId,
+            //        CheckInTime = DateTime.Now,
+            //        Notes = notes
+            //    };
+
+            //    _context.TimeRecords.Add(timeRecord);
+            //    await _context.SaveChangesAsync();
+            //    return true;
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
         }
 
         public async Task<bool> CheckOutAsync(int employeeId)

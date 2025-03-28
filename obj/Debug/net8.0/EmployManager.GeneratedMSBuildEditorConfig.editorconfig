@@ -9,113 +9,113 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = EmployManager
 build_property.RootNamespace = EmployManager
-build_property.ProjectDir = C:\CY_VietNam\CSharp\EmployManager\EmployManager\
+build_property.ProjectDir = E:\zzzzzzzzzzzz\EmployeeSystem-PRN222\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\CY_VietNam\CSharp\EmployManager\EmployManager
+build_property.MSBuildProjectDirectory = E:\zzzzzzzzzzzz\EmployeeSystem-PRN222
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Account/Login.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Dashboard.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Departments/Index.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Departments/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGVwYXJ0bWVudHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Employees/Create.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Employees/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRW1wbG95ZWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Employees/Delete.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Employees/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Employees/Details.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Employees/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRW1wbG95ZWVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Employees/Edit.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Employees/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRW1wbG95ZWVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Employees/Index.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Leaves/Index.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Leaves/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTGVhdmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Reports.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Reports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUmVwb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Salaries/Create.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Salaries/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cU2FsYXJpZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Admin/Salaries/Index.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Admin/Salaries/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cU2FsYXJpZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Employeess/ChangePassword.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Employeess/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzc1xDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Employeess/Leave.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Employeess/Leave.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzc1xMZWF2ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Employeess/Profile.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Employeess/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzc1xQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Error.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Index.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Privacy.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Shared/_AuthLayout.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/TimeTracking/MyTimeRecords.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/TimeTracking/MyTimeRecords.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGltZVRyYWNraW5nXE15VGltZVJlY29yZHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/TimeTracking/OvertimeRequest.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/TimeTracking/OvertimeRequest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGltZVRyYWNraW5nXE92ZXJ0aW1lUmVxdWVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/_ViewImports.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/_ViewStart.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/CY_VietNam/CSharp/EmployManager/EmployManager/Pages/Shared/_Layout.cshtml]
+[E:/zzzzzzzzzzzz/EmployeeSystem-PRN222/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-dh1n8rgijo

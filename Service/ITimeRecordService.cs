@@ -7,6 +7,9 @@ namespace EmployManager.Service
         Task<List<TimeRecord>> GetTimeRecordsByEmployeeIdAsync(int employeeId);
         Task<List<TimeRecord>> GetTimeRecordsByMonthAsync(int employeeId, int month, int year);
         Task<TimeRecord> GetOpenTimeRecordAsync(int employeeId);
+
+        Task<TimeRecord> GetAttendanceToday(int employeeId);
+
         Task<bool> CheckInAsync(int employeeId, string notes = null);
         Task<bool> CheckOutAsync(int employeeId);
         Task<TimeRecord> GetTimeRecordByIdAsync(int id);

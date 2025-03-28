@@ -4,6 +4,7 @@ using EmployManager.Dal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250328073007_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,18 +79,6 @@ namespace EmployManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("BasicSalary")
-                        .HasColumnType("float")
-                        .HasColumnName("BasicSalary");
-
-                    b.Property<double>("Bonus")
-                        .HasColumnType("float")
-                        .HasColumnName("Bonus");
-
-                    b.Property<double>("Deduction")
-                        .HasColumnType("float")
-                        .HasColumnName("Deduction");
-
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
@@ -142,9 +133,6 @@ namespace EmployManager.Migrations
                         new
                         {
                             Id = 1,
-                            BasicSalary = 0.0,
-                            Bonus = 0.0,
-                            Deduction = 0.0,
                             DepartmentId = 1,
                             Email = "admin@company.com",
                             EmployeeCode = "ADMIN001",
@@ -152,7 +140,7 @@ namespace EmployManager.Migrations
                             HireDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             LastName = "User",
-                            PasswordHash = "$2a$11$Hai4KiCD0w92rVMTjHxOQ.F3oHyXvo0ovGafSYt.BuJEcOxs5GVEK",
+                            PasswordHash = "$2a$11$YU6SMAkUNCgp25MNCTbFLu7VG1keSX5mMsOa.rCWMglsmeqPX9Eta",
                             PhoneNumber = "0392234",
                             RoleId = 1
                         });
