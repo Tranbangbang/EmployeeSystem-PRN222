@@ -1,0 +1,117 @@
+﻿@page
+@model EmployManager.Pages.Employeess.LeaveModel
+@{
+    ViewData["Title"] = "Đăng ký nghỉ phép";
+}
+
+<div class="container-fluid py-4">
+    <h1 class="h3 mb-4">Đăng ký nghỉ phép</h1>
+
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Đăng ký mới</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="LeaveRequest.StartDate" class="form-label">Ngày bắt đầu</label>
+                            <input asp-for="LeaveRequest.StartDate" class="form-control" type="date" />
+                            <span asp-validation-for="LeaveRequest.StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LeaveRequest.EndDate" class="form-label">Ngày kết thúc</label>
+                            <input asp-for="LeaveRequest.EndDate" class="form-control" type="date" />
+                            <span asp-validation-for="LeaveRequest.EndDate" class="text-danger"></span>  />
+                            <span asp-validation-for="LeaveRequest.EndDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LeaveRequest.LeaveType" class="form-label">Loại nghỉ phép</label>
+                            <select asp-for="LeaveRequest.LeaveType" class="form-select">
+                                <option value="">-- Chọn loại nghỉ phép --</option>
+                                <option value="Nghỉ phép năm">Nghỉ phép năm</option>
+                                <option value="Nghỉ ốm">Nghỉ ốm</option>
+                                <option value="Nghỉ không lương">Nghỉ không lương</option>
+                                <option value="Nghỉ việc riêng">Nghỉ việc riêng</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                            <span asp-validation-for="LeaveRequest.LeaveType" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LeaveRequest.Reason" class="form-label">Lý do</label>
+                            <textarea asp-for="LeaveRequest.Reason" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="LeaveRequest.Reason" class="text-danger"></span>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Lịch sử đăng ký nghỉ phép</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ngày yêu cầu</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Số ngày</th>
+                                    <th>Loại nghỉ</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.MyLeaves.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">Bạn chưa có yêu cầu nghỉ phép nào</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var leave in Model.MyLeaves)
+                                    {
+                                        <tr>
+                                            <td>@leave.RequestDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.StartDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.EndDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.LeaveDays ngày</td>
+                                            <td>@leave.LeaveType</td>
+                                            <td>
+                                                @if (leave.Status == "Chờ duyệt")
+                                                {
+                                                    <span class="badge bg-warning text-dark">@leave.Status</span>
+                                                }
+                                                else if (leave.Status == "Đã duyệt")
+                                                {
+                                                    <span class="badge bg-success">@leave.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">@leave.Status</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

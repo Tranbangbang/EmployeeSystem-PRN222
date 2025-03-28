@@ -1,0 +1,172 @@
+﻿@page
+@model EmployManager.Pages.Admin.Salaries.IndexModel
+@{
+    ViewData["Title"] = "Quản lý lương";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Quản lý lương</h1>
+        <a href="/Admin/Salaries/Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i> Tạo bảng lương
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label for="month" class="form-label">Tháng</label>
+                    <select id="month" name="month" class="form-select" onchange="this.form.submit()">
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <option value="@i" selected="@(i == Model.Month)">Tháng @i</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="year" class="form-label">Năm</label>
+                    <select id="year" name="year" class="form-select" onchange="this.form.submit()">
+                        @for (int i = DateTime.Now.Year - 5; i <= DateTime.Now.Year; i++)
+                        {
+                            <option value="@i" selected="@(i == Model.Year)">@i</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="button" class="btn btn-success" onclick="exportToExcel()">
+                        <i class="bi bi-file-earmark-excel me-2"></i> Xuất Excel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="salaryTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Mã NV</th>
+                            <th>Họ và tên</th>
+                            <th>Phòng ban</th>
+                            <th>Lương cơ bản</th>
+                            <th>Phụ cấp</th>
+                            <th>Thưởng</th>
+                            <th>Khấu trừ</th>
+                            <th>Tổng thu nhập</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Salaries.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="10" class="text-center py-4">Không có dữ liệu lương trong tháng này</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var salary in Model.Salaries)
+                            {
+                                <tr>
+                                    <td>@salary.Employee.EmployeeCode</td>
+                                    <td>@salary.Employee.FullName</td>
+                                    <td>@salary.Employee.Department?.Name</td>
+                                    <td>@salary.BasicSalary.ToString("N0") VNĐ</td>
+                                    <td>@salary.Allowance.ToString("N0") VNĐ</td>
+                                    <td>@salary.Bonus.ToString("N0") VNĐ</td>
+                                    <td>@salary.Deduction.ToString("N0") VNĐ</td>
+                                    <td class="fw-bold">@salary.TotalSalary.ToString("N0") VNĐ</td>
+                                    <td>
+                                        @if (salary.Status == "Đã thanh toán")
+                                        {
+                                            <span class="badge bg-success">@salary.Status</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">@salary.Status</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/Admin/Salaries/Edit/@salary.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            @if (salary.Status != "Đã thanh toán")
+                                            {
+                                                <button type="button" class="btn btn-sm btn-outline-success"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#processPaymentModal"
+                                                        data-id="@salary.Id"
+                                                        data-name="@salary.Employee.FullName">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Process Payment Modal -->
+<div class="modal fade" id="processPaymentModal" tabindex="-1" aria-labelledby="processPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="processPaymentModalLabel">Xác nhận thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="payment-id" name="id">
+                    <p>Bạn có chắc chắn muốn xác nhận thanh toán lương cho nhân viên <strong id="payment-name"></strong>?</p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i> Hành động này không thể hoàn tác.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success" asp-page-handler="ProcessPayment">Xác nhận thanh toán</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Process Payment Modal
+            var paymentModal = document.getElementById('processPaymentModal');
+            paymentModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+
+                var idInput = paymentModal.querySelector('#payment-id');
+                var nameSpan = paymentModal.querySelector('#payment-name');
+
+                idInput.value = id;
+                nameSpan.textContent = name;
+            });
+        });
+
+        function exportToExcel() {
+            const table = document.getElementById('salaryTable');
+            const wb  {
+            const table = document.getElementById('salaryTable');
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Bảng lương" });
+            XLSX.writeFile(wb, `Bảng_lương_T${@Model.Month}_${@Model.Year}.xlsx`);
+        }
+    </script>
+}

@@ -1,0 +1,104 @@
+﻿@page
+@model EmployManager.Pages.TimeTracking.OvertimeRequestModel
+@{
+    ViewData["Title"] = "Đăng ký OT";
+}
+
+<div class="container-fluid py-4">
+    <h1 class="h3 mb-4">Đăng ký làm thêm giờ (OT)</h1>
+
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Đăng ký mới</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="OvertimeRequest.StartTime" class="form-label">Thời gian bắt đầu</label>
+                            <input asp-for="OvertimeRequest.StartTime" class="form-control" type="datetime-local" />
+                            <span asp-validation-for="OvertimeRequest.StartTime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="OvertimeRequest.EndTime" class="form-label">Thời gian kết thúc</label>
+                            <input asp-for="OvertimeRequest.EndTime" class="form-control" type="datetime-local" />
+                            <span asp-validation-for="OvertimeRequest.EndTime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="OvertimeRequest.Reason" class="form-label">Lý do</label>
+                            <textarea asp-for="OvertimeRequest.Reason" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="OvertimeRequest.Reason" class="text-danger"></span>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Lịch sử đăng ký OT</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ngày yêu cầu</th>
+                                    <th>Thời gian bắt đầu</th>
+                                    <th>Thời gian kết thúc</th>
+                                    <th>Số giờ</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ý kiến quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.MyOvertimeRequests.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">Bạn chưa có yêu cầu OT nào</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var request in Model.MyOvertimeRequests)
+                                    {
+                                        <tr>
+                                            <td>@request.RequestDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@request.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@request.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@request.OvertimeHours.ToString("F2") giờ</td>
+                                            <td>
+                                                @if (request.Status == "Chờ duyệt")
+                                                {
+                                                    <span class="badge bg-warning text-dark">@request.Status</span>
+                                                }
+                                                else if (request.Status == "Đã duyệt")
+                                                {
+                                                    <span class="badge bg-success">@request.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">@request.Status</span>
+                                                }
+                                            </td>
+                                            <td>@request.ManagerComments</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

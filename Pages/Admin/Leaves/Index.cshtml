@@ -1,0 +1,264 @@
+﻿@page
+@model EmployManager.Pages.Admin.Leaves.IndexModel
+@{
+    ViewData["Title"] = "Quản lý nghỉ phép";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Quản lý nghỉ phép</h1>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <ul class="nav nav-tabs" id="leaveTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">
+                        Chờ duyệt <span class="badge bg-warning text-dark ms-1">@Model.PendingLeaves.Count</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button" role="tab" aria-controls="approved" aria-selected="false">
+                        Đã duyệt
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="rejected" aria-selected="false">
+                        Từ chối
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content pt-3" id="leaveTabContent">
+                <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nhân viên</th>
+                                    <th>Phòng ban</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Số ngày</th>
+                                    <th>Loại nghỉ</th>
+                                    <th>Lý do</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.PendingLeaves.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center py-4">Không có yêu cầu nghỉ phép nào đang chờ duyệt</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var leave in Model.PendingLeaves)
+                                    {
+                                        <tr>
+                                            <td>@leave.Employee.FullName</td>
+                                            <td>@leave.Employee.Department?.Name</td>
+                                            <td>@leave.StartDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.EndDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.LeaveDays ngày</td>
+                                            <td>@leave.LeaveType</td>
+                                            <td>@leave.Reason</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#approveLeaveModal"
+                                                            data-id="@leave.Id"
+                                                            data-name="@leave.Employee.FullName">
+                                                        <i class="bi bi-check-circle"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#rejectLeaveModal"
+                                                            data-id="@leave.Id"
+                                                            data-name="@leave.Employee.FullName">
+                                                        <i class="bi bi-x-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nhân viên</th>
+                                    <th>Phòng ban</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Số ngày</th>
+                                    <th>Loại nghỉ</th>
+                                    <th>Lý do</th>
+                                    <th>Ý kiến quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ApprovedLeaves.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center py-4">Không có yêu cầu nghỉ phép nào đã được duyệt</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var leave in Model.ApprovedLeaves)
+                                    {
+                                        <tr>
+                                            <td>@leave.Employee.FullName</td>
+                                            <td>@leave.Employee.Department?.Name</td>
+                                            <td>@leave.StartDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.EndDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.LeaveDays ngày</td>
+                                            <td>@leave.LeaveType</td>
+                                            <td>@leave.Reason</td>
+                                            <td>@leave.ManagerComments</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nhân viên</th>
+                                    <th>Phòng ban</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Số ngày</th>
+                                    <th>Loại nghỉ</th>
+                                    <th>Lý do</th>
+                                    <th>Ý kiến quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.RejectedLeaves.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center py-4">Không có yêu cầu nghỉ phép nào bị từ chối</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var leave in Model.RejectedLeaves)
+                                    {
+                                        <tr>
+                                            <td>@leave.Employee.FullName</td>
+                                            <td>@leave.Employee.Department?.Name</td>
+                                            <td>@leave.StartDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.EndDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@leave.LeaveDays ngày</td>
+                                            <td>@leave.LeaveType</td>
+                                            <td>@leave.Reason</td>
+                                            <td>@leave.ManagerComments</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Approve Leave Modal -->
+<div class="modal fade" id="approveLeaveModal" tabindex="-1" aria-labelledby="approveLeaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approveLeaveModalLabel">Duyệt yêu cầu nghỉ phép</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="approve-id" name="id">
+                    <p>Bạn có chắc chắn muốn duyệt yêu cầu nghỉ phép của nhân viên <strong id="approve-name"></strong>?</p>
+                    <div class="mb-3">
+                        <label for="approve-comments" class="form-label">Ý kiến quản lý</label>
+                        <textarea class="form-control" id="approve-comments" name="comments" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success" asp-page-handler="Approve">Duyệt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Leave Modal -->
+<div class="modal fade" id="rejectLeaveModal" tabindex="-1" aria-labelledby="rejectLeaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectLeaveModalLabel">Từ chối yêu cầu nghỉ phép</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="reject-id" name="id">
+                    <p>Bạn có chắc chắn muốn từ chối yêu cầu nghỉ phép của nhân viên <strong id="reject-name"></strong>?</p>
+                    <div class="mb-3">
+                        <label for="reject-comments" class="form-label">Ý kiến quản lý</label>
+                        <textarea class="form-control" id="reject-comments" name="comments" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger" asp-page-handler="Reject">Từ chối</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Approve Leave Modal
+            var approveModal = document.getElementById('approveLeaveModal');
+            approveModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+
+                var idInput = approveModal.querySelector('#approve-id');
+                var nameSpan = approveModal.querySelector('#approve-name');
+
+                idInput.value = id;
+                nameSpan.textContent = name;
+            });
+
+            // Reject Leave Modal
+            var rejectModal = document.getElementById('rejectLeaveModal');
+            rejectModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+
+                var idInput = rejectModal.querySelector('#reject-id');
+                var nameSpan = rejectModal.querySelector('#reject-name');
+
+                idInput.value = id;
+                nameSpan.textContent = name;
+            });
+        });
+    </script>
+}

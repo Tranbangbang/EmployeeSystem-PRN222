@@ -1,0 +1,208 @@
+﻿@page
+@model EmployManager.Pages.Employeess.ProfileModel
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Thông tin cá nhân</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        @if (!string.IsNullOrEmpty(Model.Profile?.ProfileImage))
+                        {
+                            <img src="@Model.Profile.ProfileImage" alt="Profile Image" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="avatar-circle mx-auto">
+                                <span class="avatar-initials">@Model.Employee.FirstName[0]@Model.Employee.LastName[0]</span>
+                            </div>
+                        }
+                    </div>
+                    <h4 class="card-title">@Model.Employee.FullName</h4>
+                    <p class="card-text text-muted">@Model.Employee.EmployeeCode</p>
+                    <p class="card-text">
+                        <i class="bi bi-building me-2"></i>@Model.Employee.Department?.Name
+                    </p>
+                    <p class="card-text">
+                        <i class="bi bi-person-badge me-2"></i>@Model.Employee.Role?.Name
+                    </p>
+                    <div class="mb-2">
+                        @if (Model.Employee.IsActive)
+                        {
+                            <span class="badge bg-success">Đang hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Vô hiệu hóa</span>
+                        }
+                    </div>
+                    <form method="post" enctype="multipart/form-data" class="mt-4">
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Cập nhật ảnh đại diện</label>
+                            <input type="file" class="form-control" id="profileImage" name="ProfileImage" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="UploadImage">
+                            <i class="bi bi-upload me-2"></i>Tải lên
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Thông tin cơ bản</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" asp-for="Profile.Id" />
+                        <input type="hidden" asp-for="Profile.EmployeeId" />
+                        <input type="hidden" asp-for="Profile.ProfileImage" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Employee.FirstName" class="form-label">Họ</label>
+                                    <input asp-for="Employee.FirstName" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Employee.LastName" class="form-label">Tên</label>
+                                    <input asp-for="Employee.LastName" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Employee.Email" class="form-label">Email</label>
+                                    <input asp-for="Employee.Email" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Employee.PhoneNumber" class="form-label">Số điện thoại</label>
+                                    <input asp-for="Employee.PhoneNumber" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.DateOfBirth" class="form-label">Ngày sinh</label>
+                                    <input asp-for="Profile.DateOfBirth" class="form-control" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.Gender" class="form-label">Giới tính</label>
+                                    <select asp-for="Profile.Gender" class="form-select">
+                                        <option value="">-- Chọn giới tính --</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Profile.Address" class="form-label">Địa chỉ</label>
+                            <textarea asp-for="Profile.Address" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.IdentityCard" class="form-label">CMND/CCCD</label>
+                                    <input asp-for="Profile.IdentityCard" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.IdentityCardIssueDate" class="form-label">Ngày cấp</label>
+                                    <input asp-for="Profile.IdentityCardIssueDate" class="form-control" type="date" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.IdentityCardIssuePlace" class="form-label">Nơi cấp</label>
+                                    <input asp-for="Profile.IdentityCardIssuePlace" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.EmergencyContact" class="form-label">Người liên hệ khẩn cấp</label>
+                                    <input asp-for="Profile.EmergencyContact" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Profile.EmergencyPhone" class="form-label">SĐT liên hệ khẩn cấp</label>
+                                    <input asp-for="Profile.EmergencyPhone" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary" asp-page-handler="UpdateProfile">
+                                <i class="bi bi-save me-2"></i>Lưu thông tin
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Thông tin công việc</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Phòng ban</label>
+                                <input class="form-control" value="@Model.Employee.Department?.Name" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Vai trò</label>
+                                <input class="form-control" value="@Model.Employee.Role?.Name" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Ngày vào làm</label>
+                                <input class="form-control" value="@Model.Employee.HireDate.ToString("dd/MM/yyyy")" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Profile.Position" class="form-label">Chức vụ</label>
+                                <input asp-for="Profile.Position" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

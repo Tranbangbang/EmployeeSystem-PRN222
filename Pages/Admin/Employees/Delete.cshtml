@@ -1,0 +1,61 @@
+﻿@page "{id:int}"
+@model EmployManager.Pages.Admin.Employees.DeleteModel
+@{
+    ViewData["Title"] = "Vô hiệu hóa nhân viên";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Vô hiệu hóa nhân viên</h1>
+        <a href="/Admin/Employees" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <h5 class="alert-heading">Cảnh báo!</h5>
+                <p>Bạn có chắc chắn muốn vô hiệu hóa nhân viên này không? Nhân viên sẽ không thể đăng nhập vào hệ thống sau khi bị vô hiệu hóa.</p>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Mã nhân viên:</div>
+                        <div class="col-md-8">@Model.Employee.EmployeeCode</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Họ và tên:</div>
+                        <div class="col-md-8">@Model.Employee.FullName</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Email:</div>
+                        <div class="col-md-8">@Model.Employee.Email</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Phòng ban:</div>
+                        <div class="col-md-8">@Model.Employee.Department?.Name</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Vai trò:</div>
+                        <div class="col-md-8">@Model.Employee.Role?.Name</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Ngày vào làm:</div>
+                        <div class="col-md-8">@Model.Employee.HireDate.ToString("dd/MM/yyyy")</div>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post">
+                <div class="d-flex justify-content-end">
+                    <a href="/Admin/Employees" class="btn btn-secondary me-2">Hủy</a>
+                    <button type="submit" class="btn btn-danger">Vô hiệu hóa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

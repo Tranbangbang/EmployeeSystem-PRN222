@@ -1,0 +1,85 @@
+﻿@page
+@model EmployManager.Pages.IndexModel
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Chấm công</h5>
+                    <div class="text-center my-4">
+                        <div class="display-4 mb-3">
+                            <span id="current-time">@DateTime.Now.ToString("HH:mm:ss")</span>
+                        </div>
+                        <div class="mb-3">
+                            @DateTime.Now.ToString("dddd, dd/MM/yyyy")
+                        </div>
+
+                        @if (!Model.IsCheckedIn)
+                        {
+                            <form method="post" asp-page-handler="CheckIn">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="fas fa-sign-in-alt me-2"></i> Giờ vào
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="CheckOut">
+                                <button type="submit" class="btn btn-danger btn-lg px-5">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Giờ ra
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Truy cập nhanh</h5>
+                    <div class="list-group mt-3">
+                        <a href="/TimeTracking/MyTimeRecords" class="list-group-item list-group-item-action">
+                            <i class="fas fa-clock me-2"></i> Lịch sử chấm công
+                        </a>
+                        <a href="/TimeTracking/OvertimeRequest" class="list-group-item list-group-item-action">
+                            <i class="fas fa-business-time me-2"></i> Đăng ký OT
+                        </a>
+                        <a href="/Employee/Profile" class="list-group-item list-group-item-action">
+                            <i class="fas fa-user me-2"></i> Thông tin cá nhân
+                        </a>
+                        @if (Model.IsAdmin)
+                        {
+                            <a href="/Admin/Dashboard" class="list-group-item list-group-item-action">
+                                <i class="fas fa-tachometer-alt me-2"></i> Bảng điều khiển Admin
+                            </a>
+                            <a href="/Admin/Employees" class="list-group-item list-group-item-action">
+                                <i class="fas fa-users me-2"></i> Quản lý nhân viên
+                            </a>
+                            <a href="/Admin/Reports" class="list-group-item list-group-item-action">
+                                <i class="fas fa-chart-bar me-2"></i> Báo cáo
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('vi-VN');
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
+}

@@ -1,0 +1,104 @@
+﻿@page
+@model EmployManager.Pages.Admin.Salaries.CreateModel
+@{
+    ViewData["Title"] = "Tạo bảng lương";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Tạo bảng lương</h1>
+        <a href="/Admin/Salaries" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label asp-for="Salary.EmployeeId" class="form-label">Nhân viên</label>
+                            <select asp-for="Salary.EmployeeId" asp-items="Model.Employees" class="form-select">
+                                <option value="">-- Chọn nhân viên --</option>
+                            </select>
+                            <span asp-validation-for="Salary.EmployeeId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label asp-for="Salary.Month" class="form-label">Tháng</label>
+                            <select asp-for="Salary.Month" class="form-select">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i">Tháng @i</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Salary.Month" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label asp-for="Salary.Year" class="form-label">Năm</label>
+                            <select asp-for="Salary.Year" class="form-select">
+                                @for (int i = DateTime.Now.Year - 5; i <= DateTime.Now.Year; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Salary.Year" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="Salary.BasicSalary" class="form-label">Lương cơ bản</label>
+                            <input asp-for="Salary.BasicSalary" class="form-control" />
+                            <span asp-validation-for="Salary.BasicSalary" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="Salary.Allowance" class="form-label">Phụ cấp</label>
+                            <input asp-for="Salary.Allowance" class="form-control" />
+                            <span asp-validation-for="Salary.Allowance" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="Salary.Bonus" class="form-label">Thưởng</label>
+                            <input asp-for="Salary.Bonus" class="form-control" />
+                            <span asp-validation-for="Salary.Bonus" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label asp-for="Salary.Deduction" class="form-label">Khấu trừ</label>
+                            <input asp-for="Salary.Deduction" class="form-control" />
+                            <span asp-validation-for="Salary.Deduction" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Salary.Notes" class="form-label">Ghi chú</label>
+                    <textarea asp-for="Salary.Notes" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Salary.Notes" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a href="/Admin/Salaries" class="btn btn-secondary me-2">Hủy</a>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
