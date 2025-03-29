@@ -35,6 +35,8 @@ namespace EmployManager.Pages.Employeess
 
         public List<Leave> MyLeaves { get; set; }
         public List<Employee> Employees { get; set; }
+
+        public int roleId;
         //public int EmployeeId { get; set; }
 
         public SalaryModel(IAuthService authService, ILeaveService leaveService, IEmployeeService employeeService, ISalaryService salaryService)
@@ -56,6 +58,10 @@ namespace EmployManager.Pages.Employeess
         public async Task OnGetAsync()
         {
             Employees = await _employeeService.GetAllEmployeesAsync();
+
+            int employeeIdCurrent =  _authService.GetCurrentEmployeeId(HttpContext);
+            Employee employeeCurrent = await _employeeService.GetEmployeeByIdAsync(employeeIdCurrent);
+            roleId = employeeCurrent.RoleId;
 
             // neu k co nhan vien 
             if (Employees == null)

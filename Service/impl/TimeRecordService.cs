@@ -164,5 +164,15 @@ namespace EmployManager.Service.impl
                 return false;
             }
         }
+
+        public async Task<List<TimeRecord>> GetAllTimeRecordsByMonthAsync( int month, int year)
+        {
+            return await _context.TimeRecords
+                .Where(tr =>
+                       tr.CheckInTime.Month == month &&
+                       tr.CheckInTime.Year == year)
+                .OrderByDescending(tr => tr.CheckInTime)
+                .ToListAsync();
+        }
     }
 }

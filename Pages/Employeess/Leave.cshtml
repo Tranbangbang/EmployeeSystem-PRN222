@@ -107,22 +107,21 @@
                                             </td>
                                             @if (Model.roleUser == 1)
                                             {
-                                                <td>
-                                                    <!-- Biểu tượng Duyệt -->
-                                                    <form method="post" asp-page-handler="Approve" class="d-inline me-2">
-                                                        <input type="hidden" name="idLeave" value="@leave.Id" />
-                                                        <button type="submit" class="btn btn-success">
-                                                            <i class="fas fa-check-circle" style="font-size: 10px;"></i>
-                                                        </button>
-                                                    </form>
-
-                                                    <!-- Biểu tượng Từ chối -->
-                                                    <form method="post" asp-page-handler="Reject" class="d-inline">
-                                                        <input type="hidden" name="idLeave" value="@leave.Id" />
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i class="fas fa-times-circle" style="font-size: 10px;"></i>
-                                                        </button>
-                                                    </form>
+                                                <td class="text-center align-middle">
+                                                    <div class="btn-group" role="group" aria-label="Approve or Reject">
+                                                        <form method="post" asp-page-handler="Approve" class="d-inline me-1">
+                                                            <input type="hidden" name="idLeave" value="@leave.Id" />
+                                                            <button type="submit" class="btn btn-sm btn-outline-success" title="Approve">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                        </form>
+                                                        <form method="post" asp-page-handler="Reject" class="d-inline">
+                                                            <input type="hidden" name="idLeave" value="@leave.Id" />
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Reject">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             }
 
